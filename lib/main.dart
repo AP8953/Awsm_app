@@ -2,17 +2,22 @@
 
 import 'package:application/pages/home.dart';
 import 'package:application/pages/login.dart';
+import 'package:application/util/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Changenamecard.dart';
 import 'drawer.dart';
 import 'image.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Constants.prefs = await SharedPreferences.getInstance();
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Application",
-      home: login(),
+      home: Constants.prefs.getBool("LoggedIn") == true ? Homepage() : login(),
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),

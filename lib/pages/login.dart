@@ -1,5 +1,6 @@
 import 'package:application/image.dart';
 import 'package:application/pages/home.dart';
+import 'package:application/util/constants.dart';
 import 'package:flutter/material.dart';
 
 class login extends StatefulWidget {
@@ -54,7 +55,8 @@ class _loginState extends State<login> {
                         ),
                         RaisedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, "/home");
+                            Constants.prefs.setBool("LoggedIn", true);
+                            Navigator.pushReplacementNamed(context, "/home");
                           },
                           child: Text("Sign In"),
                           color: Colors.redAccent,
