@@ -1,3 +1,4 @@
+import 'package:application/util/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../drawer.dart';
@@ -22,6 +23,7 @@ class _HomepageState extends State<Homepage> {
 
   getData() async {
     var res = await http.get(url);
+
     data = jsonDecode(res.body);
     print(data);
     setState(() {});
@@ -35,7 +37,10 @@ class _HomepageState extends State<Homepage> {
         actions: [
           IconButton(
             icon: Icon(Icons.exit_to_app),
-            onPressed: () {},
+            onPressed: () {
+              Constants.prefs.setBool("LoggedIn", false);
+              Navigator.pushReplacementNamed(context, "/login");
+            },
           )
         ],
       ),
